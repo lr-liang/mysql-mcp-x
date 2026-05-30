@@ -119,7 +119,7 @@ Config path: `~/.claude/claude_desktop_config.json`
     "mysql-mcp-x": {
       "command": "node",
       "args": [
-        "d:/DevWork/Code/my/mcp/mysql-mcp/dist/index.js"
+        "d:/DevWork/Code/my/mcp/mysql-mcp-x/dist/index.js"
       ],
       "env": {
         "MYSQL_HOST": "localhost",
