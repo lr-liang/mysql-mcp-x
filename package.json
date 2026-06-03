@@ -1,6 +1,6 @@
 {
   "name": "mysql-mcp-x",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MySQL MCP Server for Claude Desktop, Cursor and AI assistants. Supports MySQL 8+ with built-in SQL safety protection.",
   "type": "module",
   "main": "dist/index.js",
