@@ -1,7 +1,7 @@
 {
   "name": "mysql-mcp-x",
   "version": "1.0.0",
-  "description": "通用且针对 AI 优化的 MySQL MCP Server - 启动即连接，支持 MySQL 8+，内置 SQL 安全防护",
+  "description": "MySQL MCP Server for Claude Desktop, Cursor and AI assistants. Supports MySQL 8+ with built-in SQL safety protection.",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,10 +25,15 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
     "mysql",
+    "mysql-mcp",
+    "model-context-protocol",
     "claude",
+    "cursor",
+    "ai",
     "database",
-    "model-context-protocol"
+    "sql"
   ],
   "author": "yinliang <liang.work@icloud.com>",
   "license": "MIT",
