@@ -58,6 +58,9 @@ npm start
 | `MYSQL_PASSWORD`| Database password | (empty) |
 | `MYSQL_DATABASE` | Database name | (empty) |
 | `MYSQL_CONNECTION_LIMIT` | Max database connections in the pool | `10` |
+| `MYSQL_MCP_DISABLE_SQL_SAFE_MODE` | Disable execute tool safety protections when set to `1`, `true`, or `on` | `false` |
+
+> Note: SQL safety mode is enabled by default for `execute`. Set `MYSQL_MCP_DISABLE_SQL_SAFE_MODE=1` to disable these protections and allow all write statements, including destructive operations.
 
 ## Integration Configurations
 
@@ -80,7 +83,8 @@ Config path: `%APPDATA%\Claude\claude_desktop_config.json`
         "MYSQL_PORT": "3306",
         "MYSQL_USER": "root",
         "MYSQL_PASSWORD": "your_password",
-        "MYSQL_DATABASE": "your_database"
+        "MYSQL_DATABASE": "your_database",
+        "MYSQL_MCP_DISABLE_SQL_SAFE_MODE": "1"
       }
     }
   }
@@ -104,7 +108,8 @@ Config path: `~/.claude/claude_desktop_config.json`
         "MYSQL_PORT": "3306",
         "MYSQL_USER": "root",
         "MYSQL_PASSWORD": "your_password",
-        "MYSQL_DATABASE": "your_database"
+        "MYSQL_DATABASE": "your_database",
+        "MYSQL_MCP_DISABLE_SQL_SAFE_MODE": "1"
       }
     }
   }
@@ -126,7 +131,8 @@ Config path: `~/.claude/claude_desktop_config.json`
         "MYSQL_PORT": "3306",
         "MYSQL_USER": "root",
         "MYSQL_PASSWORD": "your_password",
-        "MYSQL_DATABASE": "your_database"
+        "MYSQL_DATABASE": "your_database",
+        "MYSQL_MCP_DISABLE_SQL_SAFE_MODE": "1"
       }
     }
   }

@@ -65,12 +65,12 @@ async function main(): Promise<void> {
   // 5. 注册 execute 工具
   server.tool(
     'execute',
-    'Execute INSERT/UPDATE/DELETE SQL statements with built-in safety protections. Automatically wraps in a transaction (BEGIN/COMMIT/ROLLBACK). UPDATE and DELETE must include a WHERE clause. DROP, TRUNCATE, and ALTER statements are blocked. Returns affectedRows, insertId, and warningStatus.',
+    'Execute INSERT/UPDATE/DELETE SQL statements with built-in safety protections by default. Automatically wraps in a transaction (BEGIN/COMMIT/ROLLBACK). UPDATE and DELETE must include a WHERE clause unless SQL safety mode is disabled via environment variable. Returns affectedRows, insertId, and warningStatus.',
     {
       sql: z
         .string()
         .describe(
-          'The INSERT/UPDATE/DELETE SQL statement to execute. Must include WHERE clause for UPDATE/DELETE.',
+          'The INSERT/UPDATE/DELETE SQL statement to execute. Must include WHERE clause for UPDATE/DELETE unless safety mode is disabled.',
         ),
     },
     async ({ sql }) => {

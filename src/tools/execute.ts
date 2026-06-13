@@ -1,4 +1,4 @@
-import { executeWrite } from '../mysql.js';
+import { executeWrite, isSqlSafetyModeDisabled } from '../mysql.js';
 
 /**
  * 禁止的危险 SQL 关键字
@@ -17,8 +17,17 @@ const FORBIDDEN_KEYWORDS = [
 /**
  * SQL 安全检查 - execute 工具
  */
-export function validateExecuteSql(sql: string): void {
+export function validateExecuteSql(sql: string, enforceSafety = true): void {
   const trimmed = sql.trim().toUpperCase();
+
+  // 禁止 SELECT 语句（应使用 query 工具）
+  if (trimmed.startsWith('SELECT')) {
+    throw new Error(`[安全拦截] execute 工具不支持 SELECT 查询。请使用 query 工具执行查询操作。`);
+  }
+
+  if (!enforceSafety) {
+    return;
+  }
 
   // 移除字符串字面量后检测
   const sqlWithoutStrings = trimmed.replace(/'[^']*'/g, '').replace(/"[^"]*"/g, '');
@@ -29,11 +38,6 @@ export function validateExecuteSql(sql: string): void {
     if (regex.test(sqlWithoutStrings)) {
       throw new Error(`[安全拦截] 检测到危险操作 "${keyword}"。此操作已被禁止以保护数据库安全。`);
     }
-  }
-
-  // 禁止 SELECT 语句（应使用 query 工具）
-  if (trimmed.startsWith('SELECT')) {
-    throw new Error(`[安全拦截] execute 工具不支持 SELECT 查询。请使用 query 工具执行查询操作。`);
   }
 
   // 检测无 WHERE 的 DELETE
@@ -55,8 +59,14 @@ export function validateExecuteSql(sql: string): void {
  * 执行 execute 工具 - 自动包裹事务
  */
 export async function handleExecute(sql: string): Promise<string> {
+  const disableSafety = isSqlSafetyModeDisabled();
+
   // 1. 安全校验
-  validateExecuteSql(sql);
+  validateExecuteSql(sql, !disableSafety);
+
+  if (disableSafety) {
+    console.error('[WARN] SQL 安全保护已禁用，execute 工具将允许所有写操作。');
+  }
 
   // 2. 在事务中执行（mysql.ts 中已封装 BEGIN/COMMIT/ROLLBACK）
   const result = await executeWrite(sql);

@@ -45,6 +45,15 @@ function getPoolConfig(): PoolOptions {
   };
 }
 
+export function isSqlSafetyModeDisabled(): boolean {
+  const raw = process.env.MYSQL_MCP_DISABLE_SQL_SAFE_MODE;
+  if (!raw) {
+    return false;
+  }
+  const normalized = raw.trim().toLowerCase();
+  return normalized !== '' && normalized !== '0' && normalized !== 'false' && normalized !== 'off' && normalized !== 'no';
+}
+
 /**
  * 初始化数据库连接池 - 启动时自动调用
  */
