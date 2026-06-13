@@ -61,6 +61,9 @@ npm start
 | `MYSQL_PASSWORD` | MySQL 密码 | (空) |
 | `MYSQL_DATABASE` | 数据库名称 | (空) |
 | `MYSQL_CONNECTION_LIMIT` | 连接池最大连接数 | `10` |
+| `MYSQL_MCP_DISABLE_SQL_SAFE_MODE` | 设置为 `1` / `true` / `on` 时禁用 execute 工具的安全保护 | `false` |
+
+> 注意：默认情况下 execute 工具的安全保护处于开启状态。设置 `MYSQL_MCP_DISABLE_SQL_SAFE_MODE=1` 可关闭此保护，允许所有写操作。
 
 ## Claude Code 配置
 
@@ -84,7 +87,8 @@ npm start
         "MYSQL_PORT": "3306",
         "MYSQL_USER": "root",
         "MYSQL_PASSWORD": "123456",
-        "MYSQL_DATABASE": "mydb"
+        "MYSQL_DATABASE": "mydb",
+        "MYSQL_MCP_DISABLE_SQL_SAFE_MODE": "1"
       }
     }
   }
@@ -109,7 +113,8 @@ npm start
         "MYSQL_PORT": "3306",
         "MYSQL_USER": "root",
         "MYSQL_PASSWORD": "123456",
-        "MYSQL_DATABASE": "mydb"
+        "MYSQL_DATABASE": "mydb",
+        "MYSQL_MCP_DISABLE_SQL_SAFE_MODE": "1"
       }
     }
   }
@@ -133,7 +138,8 @@ npm start
         "MYSQL_PORT": "3306",
         "MYSQL_USER": "root",
         "MYSQL_PASSWORD": "123456",
-        "MYSQL_DATABASE": "mydb"
+        "MYSQL_DATABASE": "mydb",
+        "MYSQL_MCP_DISABLE_SQL_SAFE_MODE": "1"
       }
     }
   }
